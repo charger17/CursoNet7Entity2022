@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CursoEntityCore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Datos
 {
@@ -10,6 +11,8 @@ namespace CursoEntityCore.Datos
         }
 
         //Escribir modelos
+        public DbSet<Categoria> Categorias { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
