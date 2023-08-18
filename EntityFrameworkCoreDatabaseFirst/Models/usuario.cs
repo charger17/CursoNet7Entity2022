@@ -13,6 +13,8 @@ namespace EntityFrameworkCoreDatabaseFirst.Models
         public int id { get; set; }
         [StringLength(50)]
         public string email { get; set; } = null!;
+        public string Ciudad { get; set; }
+
         [StringLength(200)]
         public string nombre { get; set; } = null!;
         [StringLength(30)]
