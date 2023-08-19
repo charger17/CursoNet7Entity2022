@@ -10,6 +10,7 @@ namespace CursoEntityCore.Models
         public int Articulo_Id { get; set; }
 
         [Column("Titulo")]
+        [Required(ErrorMessage = "El titulo es obligatorio")]
         [MaxLength(20)]
         public string TituloArticulo { get; set; }
 
@@ -17,14 +18,8 @@ namespace CursoEntityCore.Models
 
         public string Fecha { get; set; }
 
-        [Display(Name = "Dirección del usuario")]
-        public string Direccion { get; set; }
-
         [Range(0.1, 5.0)]
         public double Calificiacion { get; set; }
-
-        [NotMapped]
-        public int Edad { get; set; }
 
     }
 }
