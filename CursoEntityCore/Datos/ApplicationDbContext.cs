@@ -18,9 +18,11 @@ namespace CursoEntityCore.Datos
          */
 
         //Escribir modelos
-        public DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<Categoria> Categorias { get; set; }
 
-        public DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
+
+        public virtual DbSet<Articulo> Articulos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
