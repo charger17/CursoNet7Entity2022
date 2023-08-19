@@ -17,6 +17,7 @@ namespace CursoEntityCore.Models
 
         public string Fecha { get; set; }
 
+        [Display(Name = "Dirección del usuario")]
         public string Direccion { get; set; }
 
         [NotMapped]
