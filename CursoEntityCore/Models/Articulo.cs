@@ -1,11 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CursoEntityCore.Models
 {
     [Table("tbl_Articulo")]
     public class Articulo
     {
-        public int ArticuloId { get; set; }
+        [Key]
+        public int Articulo_Id { get; set; }
 
         [Column("Titulo")]
         public string TituloArticulo { get; set; }
