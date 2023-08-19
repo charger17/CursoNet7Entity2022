@@ -16,7 +16,8 @@ namespace CursoEntityCore.Models
 
         public string Descripcion { get; set; }
 
-        public string Fecha { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Fecha { get; set; }
 
         [Range(0.1, 5.0)]
         public double Calificiacion { get; set; }

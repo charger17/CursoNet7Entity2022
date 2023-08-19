@@ -9,8 +9,8 @@ namespace CursoEntityCore.Models
 
         public string NombreUsuario { get; set; }
 
-        //[EmailAddress]
-        [RegularExpression(@"^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$", ErrorMessage = "Por favor ingrese un Email correcto.")]
+        //[RegularExpression(@"^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$", ErrorMessage = "Por favor ingrese un Email correcto.")]
+        [EmailAddress(ErrorMessage = "Por favor ingrese un Email correcto.")]
         public string Email { get; set; }
 
         [Display(Name = "Dirección del usuario")]
