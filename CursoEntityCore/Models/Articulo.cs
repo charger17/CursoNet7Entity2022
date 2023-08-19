@@ -20,6 +20,9 @@ namespace CursoEntityCore.Models
         [Display(Name = "Dirección del usuario")]
         public string Direccion { get; set; }
 
+        [Range(0.1, 5.0)]
+        public double Calificiacion { get; set; }
+
         [NotMapped]
         public int Edad { get; set; }
 
