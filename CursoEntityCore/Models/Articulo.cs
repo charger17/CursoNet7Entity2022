@@ -17,5 +17,10 @@ namespace CursoEntityCore.Models
 
         public string Fecha { get; set; }
 
+        public string Direccion { get; set; }
+
+        [NotMapped]
+        public int Edad { get; set; }
+
     }
 }
