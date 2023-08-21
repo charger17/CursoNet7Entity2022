@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CursoEntityCore.Models
 {
@@ -9,6 +8,7 @@ namespace CursoEntityCore.Models
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Categoria_Id { get; set; }
 
+        [Required]
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "[NULL]")]
         public string Nombre { get; set; } 
 

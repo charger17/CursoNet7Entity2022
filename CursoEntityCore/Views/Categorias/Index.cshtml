@@ -3,12 +3,26 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Lista de Categorías</h1>
+
+<div class="row">
+    <div class="col-sm-2 col-md-4 m-2">
+        <h1>Lista de Categorías</h1>
+    </div>
+    <div class="col-sm-2 col-md-3 m-2">
+        <a asp-action="Crear" class="btn btn-primary form-control">Crear Categoría</a>
+    </div>
+    <div class="col-sm-2 col-md-3 m-2">
+        <a asp-action="CrearMultipleOpcion2" class="btn btn-secondary form-control">Crear Multiple (2 Categorias)</a>
+        <br />
+        <br />
+        <a asp-action="CrearMultipleOpcion5" class="btn btn-secondary form-control">Crear Multiple (5 Categorias)</a>
+    </div>
+</div>
 
 <div class="">
     @if(Model.Count() > 0)
     {
-        <table class="table table-sm-striped border">
+        <table class="table table-sm-striped border rounded rounded-4">
             <thead>
                 <tr>
                     <th>
