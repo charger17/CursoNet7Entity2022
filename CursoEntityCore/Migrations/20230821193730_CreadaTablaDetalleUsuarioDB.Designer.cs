@@ -4,6 +4,7 @@ using CursoEntityCore.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursoEntityCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230821193730_CreadaTablaDetalleUsuarioDB")]
+    partial class CreadaTablaDetalleUsuarioDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,21 +59,6 @@ namespace CursoEntityCore.Migrations
                     b.ToTable("tbl_Articulo");
                 });
 
-            modelBuilder.Entity("CursoEntityCore.Models.ArticuloEtiqueta", b =>
-                {
-                    b.Property<int>("Etiqueta_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Articulo_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Etiqueta_Id", "Articulo_Id");
-
-                    b.HasIndex("Articulo_Id");
-
-                    b.ToTable("ArticuloEtiqueta");
-                });
-
             modelBuilder.Entity("CursoEntityCore.Models.Categoria", b =>
                 {
                     b.Property<int>("Categoria_Id")
@@ -111,25 +98,6 @@ namespace CursoEntityCore.Migrations
                     b.ToTable("DetalleUsuarios");
                 });
 
-            modelBuilder.Entity("CursoEntityCore.Models.Etiqueta", b =>
-                {
-                    b.Property<int>("Etiqueta_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Etiqueta_Id"), 1L, 1);
-
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Etiqueta_Id");
-
-                    b.ToTable("Etiquetas");
-                });
-
             modelBuilder.Entity("CursoEntityCore.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -137,9 +105,6 @@ namespace CursoEntityCore.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("DetalleUsuario_Id")
-                        .HasColumnType("int");
 
                     b.Property<string>("Direccion")
                         .HasColumnType("nvarchar(max)");
@@ -152,71 +117,18 @@ namespace CursoEntityCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DetalleUsuario_Id")
-                        .IsUnique();
-
                     b.ToTable("Usuarios");
                 });
 
             modelBuilder.Entity("CursoEntityCore.Models.Articulo", b =>
                 {
                     b.HasOne("CursoEntityCore.Models.Categoria", "Categoria")
-                        .WithMany("Articulos")
+                        .WithMany()
                         .HasForeignKey("Categoria_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Categoria");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.ArticuloEtiqueta", b =>
-                {
-                    b.HasOne("CursoEntityCore.Models.Articulo", "Articulos")
-                        .WithMany("ArticuloEtiquetas")
-                        .HasForeignKey("Articulo_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CursoEntityCore.Models.Etiqueta", "Etiquetas")
-                        .WithMany("ArticuloEtiquetas")
-                        .HasForeignKey("Etiqueta_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Articulos");
-
-                    b.Navigation("Etiquetas");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.Usuario", b =>
-                {
-                    b.HasOne("CursoEntityCore.Models.DetalleUsuario", "DetalleUsuarios")
-                        .WithOne("Usuarios")
-                        .HasForeignKey("CursoEntityCore.Models.Usuario", "DetalleUsuario_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DetalleUsuarios");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.Articulo", b =>
-                {
-                    b.Navigation("ArticuloEtiquetas");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.Categoria", b =>
-                {
-                    b.Navigation("Articulos");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.DetalleUsuario", b =>
-                {
-                    b.Navigation("Usuarios");
-                });
-
-            modelBuilder.Entity("CursoEntityCore.Models.Etiqueta", b =>
-                {
-                    b.Navigation("ArticuloEtiquetas");
                 });
 #pragma warning restore 612, 618
         }
