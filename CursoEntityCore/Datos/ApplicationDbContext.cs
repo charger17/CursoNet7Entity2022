@@ -24,6 +24,8 @@ namespace CursoEntityCore.Datos
 
         public virtual DbSet<Articulo> Articulos { get; set; }
 
+        public virtual DbSet<DetalleUsuario> DetalleUsuarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

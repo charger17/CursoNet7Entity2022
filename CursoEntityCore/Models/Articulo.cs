@@ -24,5 +24,10 @@ namespace CursoEntityCore.Models
         [Range(0.1, 5.0)]
         public double Calificiacion { get; set; }
 
+        [ForeignKey("Categoria")]
+        public int Categoria_Id { get; set; }
+        public Categoria Categoria { get; set; }
+
+
     }
 }
