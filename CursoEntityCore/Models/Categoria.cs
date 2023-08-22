@@ -17,6 +17,8 @@ namespace CursoEntityCore.Models
         [Display(Name = "Fecha de Creación")]
         public DateTime FechaCreacion { get; set; }
 
+        public bool Activo { get; set; }
+
         public List<Articulo> Articulos { get; set; }
 
     }
