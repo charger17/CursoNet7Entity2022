@@ -31,7 +31,15 @@ namespace CursoEntityCore.Controllers
             //var listaCategorias = _context.Categorias.GroupBy(c => new {c.Activo}).Select(c => new { c.Key, Count = c.Count() }).ToList();
 
             //take y skip
-            var listaCategorias = _context.Categorias.Skip(3).Take(2).ToList();
+            //var listaCategorias = _context.Categorias.Skip(3).Take(2).ToList();
+
+            //consultas sql convencionales
+            //var listaCategorias = _context.Categorias.FromSqlRaw(@"SELECT * FROM Categorias WHERE Nombre LIKE '%Categoria%'").ToList();
+
+            //interpolacion de string
+            var id = "25";
+            var nombre = "Categoria 1";
+            var listaCategorias = _context.Categorias.FromSqlRaw(@"SELECT * FROM Categorias WHERE Categoria_Id = {0} OR Nombre = {1}", id, nombre).ToList();
 
             return View(listaCategorias);
         }
