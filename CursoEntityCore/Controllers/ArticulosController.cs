@@ -130,5 +130,25 @@ namespace CursoEntityCore.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Borrar(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var articulo = await _context.Articulos.FirstOrDefaultAsync(c => c.Articulo_Id.Equals(id));
+            if (articulo is null)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+            _context.Articulos.Remove(articulo);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
