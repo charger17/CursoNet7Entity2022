@@ -1,6 +1,7 @@
 ﻿using CursoEntityCore.Datos;
 using CursoEntityCore.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Controllers
 {
@@ -69,6 +70,67 @@ namespace CursoEntityCore.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
 
+        }
+
+        [HttpGet]
+        public IActionResult VistaCrearMultipleOpcionFormulario()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearMultipleOpcionFormulario()
+        {
+            string categoriasForm = Request.Form["Nombre"];
+            var listaCategorias = from val in categoriasForm.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries) select (val);
+
+            List<Categoria> categorias = new List<Categoria>();
+
+            foreach (var item in listaCategorias)
+            {
+                categorias.Add(new Categoria
+                {
+                    Nombre = item
+                });
+            }
+
+            _context.Categorias.AddRange(categorias);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Editar(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Categoria_Id.Equals(id));
+            if (categoria is null)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+
+            return View(categoria);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(Categoria categoria)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(categoria);
+            }
+
+            _context.Categorias.Update(categoria);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
