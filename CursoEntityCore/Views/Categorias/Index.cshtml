@@ -39,7 +39,7 @@
                     <th>
                         Nombre de Categorías
                     </th>
-                    <th></th>
+                    <th>Fecha de Creación</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +47,7 @@
                 {
                     <tr>
                         <td>@categoria.Nombre</td>
+                        <td>@categoria.FechaCreacion</td>
                         <td>
                             <a class="btn btn-primary text-white btn-sm" asp-action="Editar" asp-route-id="@categoria.Categoria_Id">Editar</a>
                             <a class="btn btn-warning text-white btn-sm" asp-action="Borrar" asp-route-id="@categoria.Categoria_Id">Borrar</a>

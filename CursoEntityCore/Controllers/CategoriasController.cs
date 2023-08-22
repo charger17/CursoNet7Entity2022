@@ -17,7 +17,12 @@ namespace CursoEntityCore.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Categoria> listaCategorias = _context.Categorias.ToList();
+            //ConsultaInicial
+            //List<Categoria> listaCategorias = _context.Categorias.ToList();
+
+            //Consulta filtrando por fecha
+            var fecha = new DateTime(2023, 08, 05);
+            List<Categoria> listaCategorias = _context.Categorias.Where(f => f.FechaCreacion >= fecha).ToList();
 
             return View(listaCategorias);
         }
