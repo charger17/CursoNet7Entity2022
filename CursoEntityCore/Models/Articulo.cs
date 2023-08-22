@@ -22,7 +22,7 @@ namespace CursoEntityCore.Models
         public DateTime Fecha { get; set; }
 
         [Range(0.1, 5.0)]
-        public double Calificiacion { get; set; }
+        public double Calificacion { get; set; }
 
         [ForeignKey("Categoria")]
         public int Categoria_Id { get; set; }
