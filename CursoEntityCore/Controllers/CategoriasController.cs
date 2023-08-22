@@ -27,9 +27,11 @@ namespace CursoEntityCore.Controllers
             //Seleccionar columnas especificas
             //List<Categoria> listaCategorias = _context.Categorias.Where(x => x.Nombre.Contains("Test 5")).Select(n => n).ToList();
 
-            //List<Categoria> listaCategorias = _context.Categorias.ToList();
+            //GroupBy
+            //var listaCategorias = _context.Categorias.GroupBy(c => new {c.Activo}).Select(c => new { c.Key, Count = c.Count() }).ToList();
 
-            var listaCategorias = _context.Categorias.GroupBy(c => new {c.Activo}).Select(c => new { c.Key, Count = c.Count() }).ToList();
+            //take y skip
+            var listaCategorias = _context.Categorias.Skip(3).Take(2).ToList();
 
             return View(listaCategorias);
         }
