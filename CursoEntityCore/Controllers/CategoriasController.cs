@@ -21,8 +21,11 @@ namespace CursoEntityCore.Controllers
             //List<Categoria> listaCategorias = _context.Categorias.ToList();
 
             //Consulta filtrando por fecha
-            var fecha = new DateTime(2023, 08, 05);
-            List<Categoria> listaCategorias = _context.Categorias.Where(f => f.FechaCreacion >= fecha).OrderByDescending(f => f.FechaCreacion).ToList();
+            //var fecha = new DateTime(2023, 08, 05);
+            //List<Categoria> listaCategorias = _context.Categorias.Where(f => f.FechaCreacion >= fecha).OrderByDescending(f => f.FechaCreacion).ToList();
+
+            //Seleccionar columnas especificas
+            List<Categoria> listaCategorias = _context.Categorias.Where(x => x.Nombre.Contains("Test 5")).Select(n => n).ToList();
 
             return View(listaCategorias);
         }
