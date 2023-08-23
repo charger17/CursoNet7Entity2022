@@ -7,7 +7,8 @@ namespace CursoEntityCore.Models
     {
         public int Id { get; set; }
 
-        public string NombreUsuario { get; set; }
+        [Required]
+        public string Nombre { get; set; }
 
         //[RegularExpression(@"^[\w-\._\+%]+@(?:[\w-]+\.)+[\w]{2,6}$", ErrorMessage = "Por favor ingrese un Email correcto.")]
         [EmailAddress(ErrorMessage = "Por favor ingrese un Email correcto.")]
@@ -19,8 +20,9 @@ namespace CursoEntityCore.Models
         [NotMapped]
         public int Edad { get; set; }
 
+
         [ForeignKey("DetalleUsuarios")]
-        public int DetalleUsuario_Id { get; set; }
+        public int? DetalleUsuario_Id { get; set; }
 
         public DetalleUsuario DetalleUsuarios { get; set; }
     }

@@ -38,6 +38,24 @@ namespace CursoEntityCore.Datos
                     a.Articulo_Id
                 });
 
+            //Siembrea de datos se hace en este método
+            var categoria5 = new Categoria 
+            {
+                Categoria_Id = 33,
+                Nombre = "Categoria 5",
+                FechaCreacion = new DateTime(2023,08,21),
+                Activo = true
+            };
+            var categoria6 = new Categoria
+            {
+                Categoria_Id = 34,
+                Nombre = "Categoria 6",
+                FechaCreacion = new DateTime(2023, 08, 21),
+                Activo = false
+            };
+
+            modelBuilder.Entity<Categoria>().HasData(new Categoria[] { categoria5, categoria6 });
+
             base.OnModelCreating(modelBuilder);
         }
     }

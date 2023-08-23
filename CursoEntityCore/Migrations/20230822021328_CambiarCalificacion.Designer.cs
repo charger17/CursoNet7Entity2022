@@ -4,6 +4,7 @@ using CursoEntityCore.Datos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CursoEntityCore.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230822021328_CambiarCalificacion")]
+    partial class CambiarCalificacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,7 +163,7 @@ namespace CursoEntityCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("DetalleUsuario_Id")
+                    b.Property<int>("DetalleUsuario_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("Direccion")
@@ -170,15 +172,13 @@ namespace CursoEntityCore.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
+                    b.Property<string>("NombreUsuario")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DetalleUsuario_Id")
-                        .IsUnique()
-                        .HasFilter("[DetalleUsuario_Id] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });
@@ -217,7 +217,9 @@ namespace CursoEntityCore.Migrations
                 {
                     b.HasOne("CursoEntityCore.Models.DetalleUsuario", "DetalleUsuarios")
                         .WithOne("Usuarios")
-                        .HasForeignKey("CursoEntityCore.Models.Usuario", "DetalleUsuario_Id");
+                        .HasForeignKey("CursoEntityCore.Models.Usuario", "DetalleUsuario_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("DetalleUsuarios");
                 });

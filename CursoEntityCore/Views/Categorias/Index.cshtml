@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Categoria>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row">
+    <div class="col-sm-2 col-md-2 m-2">
+        <h1>Lista de Categorías</h1>
+    </div>
+</div>
+<div class="row align-items-center">
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="Crear" class="btn btn-primary form-control">Crear Categoría</a>
+    </div>
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="CrearMultipleOpcion2" class="btn btn-secondary form-control">Crear Multiple (2 Categorias)</a>
+    </div>
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="CrearMultipleOpcion5" class="btn btn-secondary form-control">Crear Multiple (5 Categorias)</a><br />
+    </div>
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="VistaCrearMultipleOpcionFormulario" class="btn btn-secondary form-control">Crear Multiples Categorias en formulario</a>
+    </div>
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="BorrarMultiple2" class="btn btn-danger form-control">Borrar Multiple (2 Categorias)</a>
+    </div>
+    <div class="col-sm-2 col-md-2 m-2">
+        <a asp-action="BorrarMultiple5" class="btn btn-danger form-control">Borrar Multiple (5 Categorias)</a>
+    </div>
+</div>
+
+<div class="">
+    @if(Model.Count() > 0)
+    {
+        <table class="table table-sm-striped border rounded rounded-4">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre de Categorías
+                    </th>
+                    <th>Estado</th>
+                    <th>Fecha de Creación</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var categoria in Model)
+                {
+                    <tr>
+                        <td>@categoria.Nombre</td>
+                        <td>@categoria.Activo</td>
+                        <td>@categoria.FechaCreacion</td>
+                        <td>
+                            <a class="btn btn-primary text-white btn-sm" asp-action="Editar" asp-route-id="@categoria.Categoria_Id">Editar</a>
+                            <a class="btn btn-warning text-white btn-sm" asp-action="Borrar" asp-route-id="@categoria.Categoria_Id">Borrar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p class="">No hay Categorías.</p>
+    }
+</div>
