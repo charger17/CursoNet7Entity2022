@@ -51,26 +51,26 @@ namespace CursoEntityCore.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Categoria_Id.Equals(id));
-            if (categoria is null)
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(c => c.Id.Equals(id));
+            if (usuario is null)
             {
                 return RedirectToAction(nameof(Index));
 
             }
 
-            return View(categoria);
+            return View(usuario);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(Categoria categoria)
+        public async Task<IActionResult> Editar(Usuario usuario)
         {
             if (!ModelState.IsValid)
             {
-                return View(categoria);
+                return View(usuario);
             }
 
-            _context.Categorias.Update(categoria);
+            _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
@@ -84,33 +84,13 @@ namespace CursoEntityCore.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var categoria = await _context.Categorias.FirstOrDefaultAsync(c => c.Categoria_Id.Equals(id));
-            if (categoria is null)
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(c => c.Id.Equals(id));
+            if (usuario is null)
             {
                 return RedirectToAction(nameof(Index));
 
             }
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> BorrarMultiple2()
-        {
-            IEnumerable<Categoria> categorias = _context.Categorias.OrderByDescending(c => c.Categoria_Id).Take(2);
-            _context.Categorias.RemoveRange(categorias);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> BorrarMultiple5()
-        {
-            IEnumerable<Categoria> categorias = _context.Categorias.OrderByDescending(c => c.Categoria_Id).Take(5);
-            _context.Categorias.RemoveRange(categorias);
+            _context.Usuarios.Remove(usuario);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
