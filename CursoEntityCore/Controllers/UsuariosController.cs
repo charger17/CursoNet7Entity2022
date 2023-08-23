@@ -30,75 +30,18 @@ namespace CursoEntityCore.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Crear(Categoria categoria)
+        public async Task<IActionResult> Crear(Usuario usuario)
         {
             if (!ModelState.IsValid)
             {
-                return View(categoria);
+                return View(usuario);
             }
-            await _context.Categorias.AddAsync(categoria);
+            await _context.Usuarios.AddAsync(usuario);
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> CrearMultipleOpcion2()
-        {
-            List<Categoria> categorias = new List<Categoria>();
-            for (int i = 0; i < 2; i++)
-            {
-                //_context.Categorias.Add(new Categoria { Nombre = Guid.NewGuid().ToString() });
-                categorias.Add(new Categoria { Nombre = Guid.NewGuid().ToString() });
-            }
-            _context.Categorias.AddRange(categorias);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> CrearMultipleOpcion5()
-        {
-            List<Categoria> categorias = new List<Categoria>();
-            for (int i = 0; i < 5; i++)
-            {
-                //_context.Categorias.Add(new Categoria { Nombre = Guid.NewGuid().ToString() });
-                categorias.Add(new Categoria { Nombre = Guid.NewGuid().ToString() });
-            }
-            _context.Categorias.AddRange(categorias);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-
-        }
-
-        [HttpGet]
-        public IActionResult VistaCrearMultipleOpcionFormulario()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult CrearMultipleOpcionFormulario()
-        {
-            string categoriasForm = Request.Form["Nombre"];
-            var listaCategorias = from val in categoriasForm.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries) select (val);
-
-            List<Categoria> categorias = new List<Categoria>();
-
-            foreach (var item in listaCategorias)
-            {
-                categorias.Add(new Categoria
-                {
-                    Nombre = item
-                });
-            }
-
-            _context.Categorias.AddRange(categorias);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-
-        }
 
         [HttpGet]
         public async Task<IActionResult> Editar(int? id)
