@@ -17,9 +17,25 @@ namespace CursoEntityCore.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var listaArticulos = _context.Articulos.ToList();
+
+            //opcion 1 sin datos relacionado (Solo trae el id de la categoria)
+            //var listaArticulos = _context.Articulos.ToList();
+
+            //foreach (var item in listaArticulos)
+            //{
+            //    ////Opcion 2: carga manual se generan muchas cargas sql, no es muy eficiente si necesitamos cargar muchos datos
+            //    //item.Categoria = await _context.Categorias.FirstOrDefaultAsync(x => x.Categoria_Id.Equals(item.Categoria_Id));
+
+            //    //Opcion 3: Carga explícita (explicit loading)
+            //    await _context.Entry(item).Reference(c => c .Categoria).LoadAsync();
+            //}
+
+            //opcion4: Carga diligente o eager loading
+            var listaArticulos = await _context.Articulos.Include(c => c.Categoria).ToListAsync();
+
+
             return View(listaArticulos);
         }
 

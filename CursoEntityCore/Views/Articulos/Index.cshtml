@@ -38,7 +38,7 @@
                     <td>@articulo.Descripcion</td>
                     <td>@articulo.Fecha</td>
                     <td>@articulo.Calificacion</td>
-                    <td>@articulo.Categoria_Id</td>
+                    <td>@articulo.Categoria.Nombre</td>
                     <td>
                         <a class="btn btn-primary text-white" asp-action="Editar" asp-route-id="@articulo.Articulo_Id">Editar</a>
                         <a class="btn btn-success text-white" asp-action="AdministrarEtiquetas" asp-route-id="@articulo.Articulo_Id">Administrar Etiquetas</a>
