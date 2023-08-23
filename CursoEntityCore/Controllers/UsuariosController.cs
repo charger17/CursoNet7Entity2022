@@ -96,6 +96,43 @@ namespace CursoEntityCore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Detalle(int? id)
+        {
+            if (id is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            var usuario = await _context.Usuarios.Include(d => d.DetalleUsuarios).FirstOrDefaultAsync(u => u.Id.Equals(id));
+
+            if (usuario is null)
+            {
+                return NotFound();
+            }
+
+            return View(usuario);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AgregarDetalle(Usuario usuario)
+        {
+
+            if (usuario.DetalleUsuarios.DetalleUsuario_Id == 0)
+            {
+                //Creamos los detalles para ese usuario
+                _context.DetalleUsuarios.Add(usuario.DetalleUsuarios);
+                await _context.SaveChangesAsync();
+
+                //Despues de crear el detalle el usuario, obtenemos el usuario de la base de datos y le actualizamos el campo "DetalleUsuarioId"
+                var usuarioBd = await _context.Usuarios.FirstOrDefaultAsync(u => u.Id.Equals(usuario.Id));
+                usuarioBd.DetalleUsuario_Id = usuario.DetalleUsuarios.DetalleUsuario_Id;
+                _context.Usuarios.Update(usuarioBd);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
