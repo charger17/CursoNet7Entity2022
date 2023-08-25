@@ -28,6 +28,8 @@ namespace CursoEntityCore.Datos
 
         public virtual DbSet<Etiqueta> Etiquetas { get; set; }
 
+        public virtual DbSet<ArticuloEtiqueta> ArticuloEtiquetas { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
