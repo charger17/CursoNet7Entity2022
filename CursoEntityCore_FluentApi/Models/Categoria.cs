@@ -10,6 +10,7 @@ namespace CursoEntityCore.Models
         public string Nombre { get; set; }
 
         [Display(Name = "Fecha de Creación")]
+        [DataType(DataType.Date)]
         public DateTime FechaCreacion { get; set; }
 
         public bool Activo { get; set; }
