@@ -106,6 +106,25 @@ namespace CursoEntityCore.Datos
                 .HasForeignKey(a => a.Categoria_Id);
             #endregion
 
+            #region Fluent API: Relación de muchos a muchos (Articulo - Etiqueta)
+            modelBuilder.Entity<ArticuloEtiqueta>()
+                .HasKey(ae => new
+                {
+                    ae.Etiqueta_Id,
+                    ae.Articulo_Id
+                });
+
+            modelBuilder.Entity<ArticuloEtiqueta>()
+                .HasOne(a => a.Articulos)
+                .WithMany(a => a.ArticuloEtiquetas)
+                .HasForeignKey(a => a.Articulo_Id);
+
+            modelBuilder.Entity<ArticuloEtiqueta>()
+                .HasOne(e => e.Etiquetas)
+                .WithMany(e => e.ArticuloEtiquetas)
+                .HasForeignKey(e => e.Etiqueta_Id);
+            #endregion
+
             base.OnModelCreating(modelBuilder);
         }
     }
