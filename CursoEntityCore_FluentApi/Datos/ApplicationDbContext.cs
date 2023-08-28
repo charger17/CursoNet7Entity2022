@@ -33,30 +33,64 @@ namespace CursoEntityCore.Datos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ArticuloEtiqueta>()
-                .HasKey(a => new
-                {
-                    a.Etiqueta_Id,
-                    a.Articulo_Id
-                });
+            
+            #region Fluent API Para categoría
+            modelBuilder.Entity<Categoria>()
+                 .HasKey(c => c.Categoria_Id);
+            modelBuilder.Entity<Categoria>()
+                .Property(c => c.Nombre)
+                .IsRequired();
+            modelBuilder.Entity<Categoria>()
+                .Property(c => c.FechaCreacion)
+                .HasColumnType("date");
+            #endregion
 
-            //Siembrea de datos se hace en este método
-            var categoria5 = new Categoria 
-            {
-                Categoria_Id = 33,
-                Nombre = "Categoria 5",
-                FechaCreacion = new DateTime(2023,08,21),
-                Activo = true
-            };
-            var categoria6 = new Categoria
-            {
-                Categoria_Id = 34,
-                Nombre = "Categoria 6",
-                FechaCreacion = new DateTime(2023, 08, 21),
-                Activo = false
-            };
+            #region //Fluent API para Articulo
+            modelBuilder.Entity<Articulo>()
+                .HasKey(a => a.Articulo_Id);
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.TituloArticulo)
+                .IsRequired()
+                .HasMaxLength(20);
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.Descripcion)
+                .IsRequired()
+                .HasMaxLength(500);
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.Fecha)
+                .HasColumnType("date");
+            #endregion
 
-            modelBuilder.Entity<Categoria>().HasData(new Categoria[] { categoria5, categoria6 });
+            #region //Fluent API nombre de tabla y nombre de columna
+            modelBuilder.Entity<Articulo>()
+                .ToTable("Tbl_Articulo");
+            modelBuilder.Entity<Articulo>()
+                .Property(a => a.TituloArticulo)
+                .HasColumnName("Titulo");
+            #endregion
+
+            #region //Fluent API para Usuario
+            modelBuilder.Entity<Usuario>()
+                .HasKey(u => u.Id);
+            modelBuilder.Entity<Usuario>()
+                .Ignore(u => u.Edad);
+            #endregion
+
+            #region //Fluent API para DetalleUsuario
+            modelBuilder.Entity<DetalleUsuario>()
+                .HasKey(d => d.DetalleUsuario_Id);
+            modelBuilder.Entity<DetalleUsuario>()
+                .Property(d => d.Cedula)
+                .IsRequired();
+            #endregion
+
+            #region //Fluent API para Etiqueta
+            modelBuilder.Entity<Etiqueta>()
+                .HasKey(e => e.Etiqueta_Id);
+            modelBuilder.Entity<Etiqueta>()
+                .Property(e => e.Fecha)
+                .HasColumnType("date");
+            #endregion
 
             base.OnModelCreating(modelBuilder);
         }
