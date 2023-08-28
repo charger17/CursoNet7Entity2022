@@ -92,6 +92,14 @@ namespace CursoEntityCore.Datos
                 .HasColumnType("date");
             #endregion
 
+
+            #region Fluent API: Relación de uno a uno (Usuario - DetalleUsuario)
+            modelBuilder.Entity<Usuario>()
+                .HasOne(u => u.DetalleUsuarios)
+                .WithOne(u => u.Usuarios)
+                .HasForeignKey<Usuario>(u => u.DetalleUsuario_Id);
+            #endregion
+
             base.OnModelCreating(modelBuilder);
         }
     }
