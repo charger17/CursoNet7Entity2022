@@ -92,12 +92,18 @@ namespace CursoEntityCore.Datos
                 .HasColumnType("date");
             #endregion
 
-
             #region Fluent API: Relación de uno a uno (Usuario - DetalleUsuario)
             modelBuilder.Entity<Usuario>()
                 .HasOne(u => u.DetalleUsuarios)
                 .WithOne(u => u.Usuarios)
                 .HasForeignKey<Usuario>(u => u.DetalleUsuario_Id);
+            #endregion
+
+            #region Fluent API: Relación de uno a muchos (categoria - articulo)
+            modelBuilder.Entity<Articulo>()
+                .HasOne(c => c.Categoria)
+                .WithMany(c => c.Articulos)
+                .HasForeignKey(a => a.Categoria_Id);
             #endregion
 
             base.OnModelCreating(modelBuilder);
