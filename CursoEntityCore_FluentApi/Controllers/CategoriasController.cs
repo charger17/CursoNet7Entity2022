@@ -259,5 +259,29 @@ namespace CursoEntityCore.Controllers
             _context.SaveChanges();
         }
 
+        //Crear el método para llamar a la vista
+        public void ObtenerCategoriaDesdeVistaSQL()
+        {
+            var usarVista1 = _context.CategoriaDesdeVistas.ToList();
+
+            var usarVista2 = _context.CategoriaDesdeVistas.FirstOrDefault();
+
+            var usarVista3 = _context.CategoriaDesdeVistas.Where(c => c.Activo.Equals(true));
+        }
+
+        //Crear el método para llamar a al sp
+        public void ConsultasFromSQL()
+        {
+            //Consulta directa menos segura
+            var usuario = _context.Usuarios.FromSqlRaw("SELECT * FROM Usuarios").ToList();
+
+            //Consulta con parametros
+            var idUsuario = 2;
+            var usuario2 = _context.Usuarios.FromSqlRaw("SELECT * FROM Usuarios WHERE Id = {0}", idUsuario).ToList();
+            var usuario3 = _context.Usuarios.FromSqlInterpolated($"SELECT * FROM Usuarios WHERE Id = {idUsuario}" ).ToList();
+            var UsuarioPorProdcedimiento = _context.Usuarios.FromSqlInterpolated($"EXEC SpObtenerUsuarioId {idUsuario}").ToList();
+
+        }
+
     }
 }
