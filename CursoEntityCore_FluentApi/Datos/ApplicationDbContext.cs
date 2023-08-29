@@ -1,4 +1,5 @@
 ﻿using CursoEntityCore.Models;
+using CursoEntityCore_FluentApi.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CursoEntityCore.Datos
@@ -29,6 +30,10 @@ namespace CursoEntityCore.Datos
         public virtual DbSet<Etiqueta> Etiquetas { get; set; }
 
         public virtual DbSet<ArticuloEtiqueta> ArticuloEtiquetas { get; set; }
+
+
+        //Desde Vista SQL
+        public virtual DbSet<CategoriaDesdeVista> CategoriaDesdeVistas { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -123,6 +128,12 @@ namespace CursoEntityCore.Datos
                 .HasOne(e => e.Etiquetas)
                 .WithMany(e => e.ArticuloEtiquetas)
                 .HasForeignKey(e => e.Etiqueta_Id);
+            #endregion
+
+            #region Views: Carga desde una vista sql sin llave primaria
+            modelBuilder.Entity<CategoriaDesdeVista>()
+                .HasNoKey()
+                .ToView("ObtenerCategorias");
             #endregion
 
             base.OnModelCreating(modelBuilder);
