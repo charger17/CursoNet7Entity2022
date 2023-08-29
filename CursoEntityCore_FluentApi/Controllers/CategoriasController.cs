@@ -195,6 +195,69 @@ namespace CursoEntityCore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public void EjecucionDiferida()
+        {
+            //1. Cuando hace una iteraciòn sobre ellos
+            var categorias = _context.Categorias;
+
+            foreach(var categoria in categorias)
+            {
+                var nombreCat = "";
+                nombreCat = categoria.Nombre;
+            }
+
+            //2. Cuando se llama a cualquiera de los métodos: ToDictionary, ToList, ToArray
+            var categorias2 = _context.Categorias.ToList();
+            foreach (var categoria in categorias2)
+            {
+                var nombreCat = "";
+                nombreCat = categoria.Nombre;
+            }
+
+            //3. Cuando se llama cualquier método que retorna un solo objeto:
+            //First, single, count, max, entre otros
+            var categorias3 = _context.Categorias;
+
+            var totalCategorias = categorias3.Count();
+            
+            var totalCategorias2 = _context.Categorias.Count();
+
+            var test = "";
+
+        }
+
+        public void TestIEnumerable()
+        {
+            //1. Código con IEnumerable
+            IEnumerable<Categoria> listaCategorias = _context.Categorias;
+            var categoriasActivas = listaCategorias.Where(a => a.Activo.Equals(true)).ToList();
+        }
+
+        public void TestIQuerable()
+        {
+            //1. Código con IQuerable
+            //IQuerable hereda de IEnumerable
+            //Todo lo que se puede hacer IEnumerable se puede hacer con IQuerable 
+            IQueryable<Categoria> listaCategorias = _context.Categorias;
+            var categoriasActivas = listaCategorias.Where(a => a.Activo.Equals(true)).ToList();
+        }
+
+        public void TestUpdate()
+        {
+            var datoUsuario = _context.Usuarios.Include(d => d.DetalleUsuarios).FirstOrDefault(d => d.Id.Equals(2));
+            datoUsuario.DetalleUsuarios.Deporte = "Natacion";
+            _context.Update(datoUsuario);
+            _context.SaveChanges();
+        }
+
+        public void TestAttach()
+        {
+            var datoUsuario = _context.Usuarios.Include(d => d.DetalleUsuarios).FirstOrDefault(d => d.Id.Equals(2));
+            datoUsuario.DetalleUsuarios.Deporte = "Ciclismo";
+            _context.Attach(datoUsuario);
+            _context.SaveChanges();
+        }
 
     }
 }
