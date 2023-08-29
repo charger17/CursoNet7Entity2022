@@ -195,6 +195,38 @@ namespace CursoEntityCore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public void EjecucionDiferida()
+        {
+            //1. Cuando hace una iteraciòn sobre ellos
+            var categorias = _context.Categorias;
+
+            foreach(var categoria in categorias)
+            {
+                var nombreCat = "";
+                nombreCat = categoria.Nombre;
+            }
+
+            //2. Cuando se llama a cualquiera de los métodos: ToDictionary, ToList, ToArray
+            var categorias2 = _context.Categorias.ToList();
+            foreach (var categoria in categorias2)
+            {
+                var nombreCat = "";
+                nombreCat = categoria.Nombre;
+            }
+
+            //3. Cuando se llama cualquier método que retorna un solo objeto:
+            //First, single, count, max, entre otros
+            var categorias3 = _context.Categorias;
+
+            var totalCategorias = categorias3.Count();
+            
+            var totalCategorias2 = _context.Categorias.Count();
+
+            var test = "";
+
+        }
+
 
     }
 }
