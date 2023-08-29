@@ -227,6 +227,37 @@ namespace CursoEntityCore.Controllers
 
         }
 
+        public void TestIEnumerable()
+        {
+            //1. Código con IEnumerable
+            IEnumerable<Categoria> listaCategorias = _context.Categorias;
+            var categoriasActivas = listaCategorias.Where(a => a.Activo.Equals(true)).ToList();
+        }
+
+        public void TestIQuerable()
+        {
+            //1. Código con IQuerable
+            //IQuerable hereda de IEnumerable
+            //Todo lo que se puede hacer IEnumerable se puede hacer con IQuerable 
+            IQueryable<Categoria> listaCategorias = _context.Categorias;
+            var categoriasActivas = listaCategorias.Where(a => a.Activo.Equals(true)).ToList();
+        }
+
+        public void TestUpdate()
+        {
+            var datoUsuario = _context.Usuarios.Include(d => d.DetalleUsuarios).FirstOrDefault(d => d.Id.Equals(2));
+            datoUsuario.DetalleUsuarios.Deporte = "Natacion";
+            _context.Update(datoUsuario);
+            _context.SaveChanges();
+        }
+
+        public void TestAttach()
+        {
+            var datoUsuario = _context.Usuarios.Include(d => d.DetalleUsuarios).FirstOrDefault(d => d.Id.Equals(2));
+            datoUsuario.DetalleUsuarios.Deporte = "Ciclismo";
+            _context.Attach(datoUsuario);
+            _context.SaveChanges();
+        }
 
     }
 }
